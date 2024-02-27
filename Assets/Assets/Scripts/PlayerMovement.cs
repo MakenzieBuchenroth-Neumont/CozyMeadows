@@ -8,10 +8,10 @@ public class PlayerMovement : MonoBehaviour {
 	[SerializeField] Rigidbody2D rb;
 	[SerializeField] Animator animator;
 	[SerializeField] float speed = 5f;
-	[SerializeField] GameObject target;
+	//[SerializeField] GameObject target;
 
-	[SerializeField] AudioSource source;
-	public AudioClip walk;
+	//[SerializeField] AudioSource source;
+	//public AudioClip walk;
 
 	bool isMoving = true;
 
@@ -40,19 +40,19 @@ public class PlayerMovement : MonoBehaviour {
 			rb.SetRotation(Vector3.Angle(Vector3.up, move));
 		}*/
 		if (movement.magnitude > 0) {
-			target.transform.position = gameObject.transform.position + new Vector3(movement.normalized.x, movement.normalized.y, 0);
+			//target.transform.position = gameObject.transform.position + new Vector3(movement.normalized.x, movement.normalized.y, 0);
 		} else {
 			//target.transform.position = gameObject.transform.position + new Vector3(0, -1, 0);
 		}
 
-		if (isMoving) {
-			if (!source.isPlaying) {
-				source.PlayOneShot(walk);
-			}
-		}
-		else {
-			source.Stop();
-		}
+		//if (isMoving) {
+			//if (!source.isPlaying) {
+				//source.PlayOneShot(walk);
+			//}
+		//}
+		//else {
+			//source.Stop();
+		//}
 	}
 
 	private void FixedUpdate() {
