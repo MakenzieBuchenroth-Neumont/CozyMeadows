@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Plant : MonoBehaviour {
@@ -11,6 +12,7 @@ public class Plant : MonoBehaviour {
         foreach (var sprite in sprites) {
             sprite.SetActive(false);
         }
+        sprites[0].SetActive(true);
     }
 
     // Update is called once per frame
@@ -20,36 +22,44 @@ public class Plant : MonoBehaviour {
 
     public void setActiveSprite() {
         currentDay++;
-        switch (currentDay) {
-            case 0:
-            case 1:
-                sprites[0].SetActive(true);
-                break;
-            case 2:
-            case 3:
-                sprites[0].SetActive(false);
-                sprites[1].SetActive(true);
-                break;
-            case 4:
-            case 5:
-                sprites[1].SetActive(false);
-                sprites[2].SetActive(true);
-                break;
-            case 6:
-            case 7:
-                sprites[2].SetActive(false);
-                sprites[3].SetActive(true);
-                break;
-            case 8:
-            case 9:
-                sprites[3].SetActive(false);
-                sprites[4].SetActive(true);
-                break;
-            case 10:
-                sprites[4].SetActive(false);
-                sprites[5].SetActive(true);
-                break;
-
+        foreach (var sprite in sprites) {
+            sprite.SetActive(false);
         }
+        if (currentDay <= maturityDay) {
+            sprites[(int)(((float)currentDay / (float)maturityDay) * (sprites.Count - 1))].SetActive(true);
+        } else {
+            sprites[sprites.Count - 1].SetActive(true);
+        }
+        //switch (currentDay) {
+        //    case 0:
+        //    case 1:
+        //        sprites[0].SetActive(true);
+        //        break;
+        //    case 2:
+        //    case 3:
+        //        sprites[0].SetActive(false);
+        //        sprites[1].SetActive(true);
+        //        break;
+        //    case 4:
+        //    case 5:
+        //        sprites[1].SetActive(false);
+        //        sprites[2].SetActive(true);
+        //        break;
+        //    case 6:
+        //    case 7:
+        //        sprites[2].SetActive(false);
+        //        sprites[3].SetActive(true);
+        //        break;
+        //    case 8:
+        //    case 9:
+        //        sprites[3].SetActive(false);
+        //        sprites[4].SetActive(true);
+        //        break;
+        //    case 10:
+        //        sprites[4].SetActive(false);
+        //        sprites[5].SetActive(true);
+        //        break;
+
+        //}
     }
 }
