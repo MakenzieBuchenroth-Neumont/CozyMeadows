@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 	[SerializeField] GameObject menuUI;
+	[SerializeField] GameObject pauseUI;
 
 	enum State {
 		STARTSCREEN,
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour {
 		switch (currentState) {
 			case State.STARTSCREEN:
 				menuUI.SetActive(true);
+				pauseUI.SetActive(false);
 				break;
 			case State.STARTGAME:
 				menuUI.SetActive(false);
@@ -27,6 +29,14 @@ public class GameManager : MonoBehaviour {
 				if (Input.GetKeyDown(KeyCode.O)) {
 					DayChange();
 				}
+				if (Input.GetKeyDown(KeyCode.Escape)) {
+					if (currentState == State.GAME) {
+						pauseUI.SetActive(true);
+					}
+					else {
+						pauseUI.SetActive(false);
+					}
+				}
 				break;
 			case State.DAYCHANGE:
 				var plants = GameObject.FindGameObjectsWithTag("Plant");
@@ -35,7 +45,6 @@ public class GameManager : MonoBehaviour {
 						plantScript.setActiveSprite();
 					}
 				}
-				currentState = State.GAME;
 				break;
 		}
 	}
